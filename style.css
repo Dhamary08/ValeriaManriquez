@@ -5,23 +5,6 @@
 	margin: 0;
 	padding: 0;
 }
-
-.primary-color {
-	color: #192e40;
-}
-.secundary-color {
-	color: #3f6f8c;
-}
-.success-color {
-	color: #96c6d9;
-}
-.danger-color {
-	color: #f25f29;
-}
-.terciary-color{
-	color: #F28D35;
-}
-
 body {
 	font-family: Montserrat, sans-serif;
 	font-weight: 400;
@@ -33,20 +16,11 @@ body {
 	-webkit-text-size-adjust: 100%;
 }
 
-h1 {
-	font-size: 2rem;
-	padding: 0.3rem 0;
-}
-
 .contenedor {
 	width: 100vw;
 	height: 100vh;
 	padding: 0;
 	margin: 0;
-	background-image: url(../assets/img/fondo.jpeg);
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -57,82 +31,37 @@ h1 {
 	flex-direction: column;
 	width: 90%;
 	height: 70%;
-	background-color: rgba(255, 255, 255, 0.178);
+	background-color: #f28d356c;
 	background-clip: border-box;
-	border-radius: 2rem;
+	border-radius: 11rem 1rem 11rem 1rem;
 }
 
-.contenedor-pagina {
-	display: flex;
-	flex-wrap: wrap;
-}
-.contenedor-pagina > * {
-	flex-shrink: 0;
-	width: 100%;
-	max-width: 100%;
-}
 .centrar {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-.targetaSecundaria {
-	width: 50%;
-	padding: 0.5rem;
-}
-
-.img-logo {
-	width: 60%;
-	max-height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin: auto;
-}
 
 .text-center {
 	text-align: center;
+}
+h1, h2{
 	color: #f1f1f1;
 }
-
-.d-flex {
-	display: flex;
-}
-.img-responsive {
-	max-width: 50%;
-	height: 70%;
-	margin: 0.5rem;
-}
-.img-responsive-group {
-	width: 100%;
-	max-height: 100%;
-	padding: 0.5rem;
-}
-
-.page {
-	flex: 1;
-}
-
 @media (max-width: 768px) {
-	.targetaSecundaria {
-		width: 100%;
-	}
-	.img-logo {
-		width: 40%;
-	}
 	h1 {
 		font-size: 1.5rem;
 	}
 }
 
 @media (max-width: 768px) and (orientation: landscape) {
-	.targetaSecundaria {
-		width: 50%;
-	}
-	.img-logo {
+	.img {
 		width: 50%;
 	}
 }
+
+
+/* logo que se mueve */
 
 .circulo {
 	width: 35px;
@@ -186,4 +115,14 @@ h1 {
 	to {
 		border-radius: 22% 100% 30% 0px / 0% 88% 0px 0px;
 	}
+}
+body{
+	position: relative;
+}
+#particles-js{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
 }
