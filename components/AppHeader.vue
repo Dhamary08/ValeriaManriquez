@@ -4,7 +4,7 @@
       <div class="header-content">
         <div class="logo">
           <NuxtLink to="/" class="logo-link">
-            <span class="logo-text">Portfolio</span>
+            <span class="logo-text">VM</span>
           </NuxtLink>
         </div>
 
@@ -27,7 +27,7 @@
           </ul>
         </nav>
 
-        <!-- <div class="header-actions">
+        <div class="header-actions">
           <ThemeToggle />
           <button
             class="mobile-menu-toggle"
@@ -38,7 +38,7 @@
             <span></span>
             <span></span>
           </button>
-        </div> -->
+        </div>
       </div>
     </div>
   </header>
@@ -54,9 +54,9 @@ const handleScroll = () => {
   isScrolled.value = window.scrollY > 50;
 };
 
-/* const toggleMobileMenu = () => {
+const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
-}; */
+};
 
 const closeMenu = () => {
   isMobileMenuOpen.value = false;

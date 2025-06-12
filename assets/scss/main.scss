@@ -1,22 +1,22 @@
 // Variables
-@import "abstracts/variables";
-@import "abstracts/mixins";
+@use "abstracts/variables" as *;
+@use "abstracts/mixins" as *;
 
 // Base
-@import "base/reset";
-@import "base/typography";
+@use "base/reset" as *;
+@use "base/typography" as *;
 
 // Layout
-@import "layout/container";
-@import "layout/grid";
+@use "layout/container" as *;
+@use "layout/grid" as *;
 
 // Components
-@import "components/button";
-@import "components/header";
+@use "components/button" as *;
+@use "components/header" as *;
 
 // Pages
-@import "pages/home";
+@use "pages/home" as *;
 
 // Themes
-@import "themes/light";
-@import "themes/dark";
+@use "themes/light" as *;
+@use "themes/dark" as *;
