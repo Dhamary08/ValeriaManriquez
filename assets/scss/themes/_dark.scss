@@ -1,0 +1,16 @@
+.dark-mode {
+  // Dark theme variables are already defined in variables.scss
+  // Additional dark theme specific styles can go here
+
+  .hero-section {
+    .floating-elements .element {
+      opacity: 0.05;
+    }
+  }
+
+  .project-card {
+    &:hover {
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+  }
+}

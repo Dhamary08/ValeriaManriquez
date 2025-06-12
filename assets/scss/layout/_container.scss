@@ -1,0 +1,14 @@
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+
+  @include respond-to("sm") {
+    padding: 0 var(--space-xl);
+  }
+
+  @include respond-to("lg") {
+    padding: 0 var(--space-2xl);
+  }
+}

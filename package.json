@@ -1,21 +1,36 @@
 {
-  "name": "valeriamanriquez",
+  "name": "nuxt-app",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "vue": "^3.5.13"
+    "@nuxt/content": "^3.5.1",
+    "@nuxt/eslint": "^1.4.1",
+    "@nuxt/fonts": "^0.11.4",
+    "@nuxt/icon": "^1.13.0",
+    "@nuxt/image": "^1.10.0",
+    "@nuxt/scripts": "^0.11.8",
+    "@nuxtjs/google-fonts": "^3.2.0",
+    "@unhead/vue": "^2.0.10",
+    "dhamy-kit-ui": "^1.0.0",
+    "gsap": "^3.13.0",
+    "lucide-vue-next": "^0.514.0",
+    "vue": "^3.5.16",
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.2.3",
-    "@vue/tsconfig": "^0.7.0",
-    "typescript": "~5.8.3",
-    "vite": "^6.3.5",
-    "vue-tsc": "^2.2.8"
+    "@nuxt/devtools": "^2.5.0",
+    "@nuxt/typescript-build": "^3.0.2",
+    "eslint": "^9.28.0",
+    "nuxt": "^3.17.5",
+    "prettier": "^3.5.3",
+    "sass": "^1.89.2",
+    "typescript": "^5.8.3"
   }
 }
