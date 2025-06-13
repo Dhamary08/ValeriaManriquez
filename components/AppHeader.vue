@@ -72,5 +72,5 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@import "~/assets/scss/components/header.scss";
+@use "~/assets/scss/components/header.scss" as *;
 </style>

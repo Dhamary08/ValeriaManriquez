@@ -9,8 +9,8 @@
     :disabled="disabled || loading"
     @click="$emit('click', $event)"
   >
-    <span v-if="loading" class="loading-spinner" />
-    <slot v-else />
+    <span v-if="loading" class="loading-spinner" aria-hidden="true"></span>
+    <slot v-else></slot>
   </button>
 </template>
 
@@ -41,5 +41,5 @@ defineEmits(["click"]);
 </script>
 
 <style lang="scss" scoped>
-@import "~/assets/scss/components/button.scss";
+@use "~/assets/scss/components/button.scss" as *;
 </style>
