@@ -9,7 +9,6 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-05-15",
   // Modules
   modules: [
-    "@nuxt/content",
     "@nuxt/eslint",
     "@nuxt/fonts",
     "@nuxt/icon",
