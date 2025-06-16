@@ -8,8 +8,15 @@
             <span class="line">Hola, soy</span>
             <span class="line highlight">Valeria</span>
           </h1>
-          <p class="hero-subtitle">
-            Ingeniera Industrial y Desarrollador Frontend
+          <p
+            class="hero-subtitle"
+            style="
+              border-left: 0.5rem solid var(--border-color);
+              padding-left: 12px;
+            "
+          >
+            Ingeniera Industrial <br />
+            Desarrolladora Frontend
           </p>
           <div class="hero-cta">
             <BaseButton variant="primary" @click="scrollToSection('about')">
@@ -154,7 +161,7 @@ const projects = ref([
     title: "E-commerce Platform",
     description:
       "Plataforma de comercio electrónico desarrollada con Nuxt 3 y Supabase",
-    image: "/placeholder.svg?height=250&width=400",
+    image: "/placeholder-1.svg?height=250&width=400",
     technologies: ["Nuxt.js", "Vue 3", "Supabase", "Stripe"],
     demoUrl: "#",
     codeUrl: "#",
@@ -164,7 +171,7 @@ const projects = ref([
     title: "Task Management App",
     description:
       "Aplicación de gestión de tareas con funcionalidades avanzadas",
-    image: "/placeholder.svg?height=250&width=400",
+    image: "/placeholder-1.svg?height=250&width=400",
     technologies: ["Vue.js", "Pinia", "Firebase", "Tailwind"],
     demoUrl: "#",
     codeUrl: "#",
@@ -174,7 +181,7 @@ const projects = ref([
     title: "Portfolio Website",
     description:
       "Sitio web de portafolio con animaciones GSAP y diseño responsive",
-    image: "/placeholder.svg?height=250&width=400",
+    image: "/placeholder-1.svg?height=250&width=400",
     technologies: ["Nuxt.js", "GSAP", "SCSS", "Netlify"],
     demoUrl: "#",
     codeUrl: "#",
