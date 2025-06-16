@@ -5,11 +5,11 @@
       <div class="project-overlay">
         <div class="project-actions">
           <a :href="project.demoUrl" class="action-btn demo" target="_blank">
-            <Icon name="external-link" />
+            <IconImg name="external-link" />
             <span>Demo</span>
           </a>
           <a :href="project.codeUrl" class="action-btn code" target="_blank">
-            <Icon name="github" />
+            <IconImg name="github" />
             <span>Código</span>
           </a>
         </div>

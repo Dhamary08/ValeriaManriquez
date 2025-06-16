@@ -1,7 +1,11 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
 .home-page {
   // Hero Section
   .hero-section {
     min-height: 100vh;
+    @include flex-center;
     position: relative;
     overflow: hidden;
 
@@ -101,14 +105,6 @@
             left: 50%;
             animation-delay: 4s;
           }
-
-          &.element-4 {
-            width: 30px;
-            height: 30px;
-            bottom: 30%;
-            left: 20%;
-            animation-delay: 4s;
-          }
         }
       }
     }
@@ -195,6 +191,26 @@
       }
     }
   }
+
+  // Experience Section
+  .experience-section {
+    padding: var(--space-3xl) 0;
+    background: var(--bg-primary);
+
+    @media (max-width: 768px) {
+      padding: var(--space-2xl) 0;
+    }
+  }
+
+  // Education Section
+  .education-section {
+    padding: var(--space-3xl) 0;
+    background: var(--bg-secondary);
+
+    @media (max-width: 768px) {
+      padding: var(--space-2xl) 0;
+    }
+  }
 }
 
 // Animations
@@ -205,5 +221,64 @@
   }
   50% {
     transform: translateY(-20px);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .experience-timeline {
+    .timeline-item {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .education-carousel {
+    .carousel-container {
+      height: auto;
+      min-height: 350px;
+    }
   }
 }

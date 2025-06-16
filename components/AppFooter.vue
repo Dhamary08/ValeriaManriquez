@@ -13,10 +13,30 @@
         <div class="footer-section">
           <h4 class="section-title">Enlaces</h4>
           <ul class="footer-links">
-            <li><a href="#hero">Inicio</a></li>
-            <li><a href="#about">Quién Soy</a></li>
-            <li><a href="#work">Trabajo</a></li>
-            <li><a href="#contact">Contacto</a></li>
+            <li class="nav-item">
+              <a href="#hero" class="nav-link" @click="closeMenu">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a href="#about" class="nav-link" @click="closeMenu">Quién Soy</a>
+            </li>
+            <li class="nav-item">
+              <a href="#experience" class="nav-link" @click="closeMenu"
+                >Experiencia</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="#education" class="nav-link" @click="closeMenu"
+                >Educación</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="#work" class="nav-link" @click="closeMenu">Portafolio</a>
+            </li>
+            <li class="nav-item">
+              <a href="#contact" class="nav-link" @click="closeMenu"
+                >Contacto</a
+              >
+            </li>
           </ul>
         </div>
 
@@ -24,13 +44,13 @@
           <h4 class="section-title">Sígueme</h4>
           <div class="social-links">
             <a href="#" class="social-link">
-              <Icon name="github" />
+              <IconImg name="github" />
             </a>
             <a href="#" class="social-link">
-              <Icon name="linkedin" />
+              <IconImg name="linkedin" />
             </a>
             <a href="#" class="social-link">
-              <Icon name="twitter" />
+              <IconImg name="twitter" />
             </a>
           </div>
         </div>
@@ -47,6 +67,10 @@
 
 <script setup>
 const currentYear = new Date().getFullYear();
+const isMobileMenuOpen = ref(false);
+const closeMenu = () => {
+  isMobileMenuOpen.value = false;
+};
 </script>
 
 <style lang="scss" scoped>

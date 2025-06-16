@@ -11,12 +11,21 @@ import {
   Menu,
   X,
   ExternalLink,
+  Github,
+  Linkedin,
+  Twitter,
   Mail,
   Phone,
   MapPin,
   Code,
   Database,
   Palette,
+  Building,
+  GraduationCap,
+  Award,
+  Star,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-vue-next";
 
 const props = defineProps({
@@ -44,6 +53,12 @@ const iconMap = {
   typescript: Code,
   css: Palette,
   nodejs: Database,
+  building: Building,
+  "graduation-cap": GraduationCap,
+  award: Award,
+  star: Star,
+  "chevron-left": ChevronLeft,
+  "chevron-right": ChevronRight,
 };
 
 const iconComponent = computed(() => {

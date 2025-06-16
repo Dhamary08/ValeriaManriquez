@@ -1,7 +1,7 @@
 <template>
   <div class="skill-card">
     <div class="skill-icon">
-      <Icon :name="skill.icon" />
+      <IconImg :name="skill.icon" />
     </div>
     <div class="skill-info">
       <h4 class="skill-name">{{ skill.name }}</h4>

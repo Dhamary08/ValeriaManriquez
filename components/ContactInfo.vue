@@ -9,7 +9,7 @@
     <div class="contact-items">
       <div class="contact-item">
         <div class="contact-icon">
-          <Icon name="mail" />
+          <IconImg name="mail" />
         </div>
         <div class="contact-details">
           <h4>Email</h4>
@@ -19,7 +19,7 @@
 
       <!--  <div class="contact-item">
         <div class="contact-icon">
-          <Icon name="phone" />
+          <IconImg name="phone" />
         </div>
         <div class="contact-details">
           <h4>Teléfono</h4>
@@ -29,7 +29,7 @@
 
       <div class="contact-item">
         <div class="contact-icon">
-          <Icon name="map-pin" />
+          <IconImg name="map-pin" />
         </div>
         <div class="contact-details">
           <h4>Ubicación</h4>
@@ -40,13 +40,13 @@
 
     <div class="social-links">
       <a href="#" class="social-link">
-        <Icon name="github" />
+        <IconImg name="github" />
       </a>
       <a href="#" class="social-link">
-        <Icon name="linkedin" />
+        <IconImg name="linkedin" />
       </a>
       <a href="#" class="social-link">
-        <Icon name="twitter" />
+        <IconImg name="twitter" />
       </a>
     </div>
   </div>

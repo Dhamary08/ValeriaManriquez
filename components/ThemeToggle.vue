@@ -6,7 +6,7 @@
   >
     <div class="toggle-track">
       <div class="toggle-thumb" :class="{ dark: isDarkMode }">
-        <Icon :name="isDarkMode ? 'moon' : 'sun'" />
+        <IconImg :name="isDarkMode ? 'moon' : 'sun'" />
       </div>
     </div>
   </button>

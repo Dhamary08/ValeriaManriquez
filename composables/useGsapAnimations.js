@@ -1,7 +1,7 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-if (!import.meta.client) {
+if (import.meta.client) {
   gsap.registerPlugin(ScrollTrigger);
 }
 
@@ -125,6 +125,50 @@ export const useGsapAnimations = () => {
         ease: "power2.out",
         scrollTrigger: {
           trigger: ".contact-content",
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+
+    // Experience timeline animations
+    gsap.utils.toArray(".timeline-item").forEach((item, index) => {
+      const isRight = index % 2 === 1;
+
+      gsap.fromTo(
+        item,
+        {
+          x: isRight ? 100 : -100,
+          opacity: 0,
+          scale: 0.9,
+        },
+        {
+          x: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 1,
+          delay: index * 0.2,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: item,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    });
+
+    // Education carousel entrance animation
+    gsap.fromTo(
+      ".education-carousel",
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".education-carousel",
           start: "top 80%",
           toggleActions: "play none none reverse",
         },

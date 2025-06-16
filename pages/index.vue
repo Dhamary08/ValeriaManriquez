@@ -68,6 +68,25 @@
       </div>
     </section>
 
+    <!-- Experience Section -->
+    <section id="experience" class="experience-section">
+      <div class="container">
+        <SectionTitle
+          title="Experiencia Laboral"
+          subtitle="Mi trayectoria profesional"
+        />
+        <ExperienceTimeline />
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="education-section">
+      <div class="container">
+        <SectionTitle title="Formación Académica" subtitle="Mi educación" />
+        <EducationCarousel />
+      </div>
+    </section>
+
     <!-- Work Section -->
     <section id="work" class="work-section">
       <div class="container">

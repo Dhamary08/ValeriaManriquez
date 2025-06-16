@@ -4,7 +4,7 @@
       <div class="header-content">
         <div class="logo">
           <NuxtLink to="/" class="logo-link">
-            <span class="logo-text">VM</span>
+            <span class="logo-text">Portfolio</span>
           </NuxtLink>
         </div>
 
@@ -17,7 +17,17 @@
               <a href="#about" class="nav-link" @click="closeMenu">Quién Soy</a>
             </li>
             <li class="nav-item">
-              <a href="#work" class="nav-link" @click="closeMenu">Trabajo</a>
+              <a href="#experience" class="nav-link" @click="closeMenu"
+                >Experiencia</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="#education" class="nav-link" @click="closeMenu"
+                >Educación</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="#work" class="nav-link" @click="closeMenu">Portafolio</a>
             </li>
             <li class="nav-item">
               <a href="#contact" class="nav-link" @click="closeMenu"
@@ -72,5 +82,5 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@use "~/assets/scss/components/header.scss" as *;
+@import "~/assets/scss/components/header.scss";
 </style>
