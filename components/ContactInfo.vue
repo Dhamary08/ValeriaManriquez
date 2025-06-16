@@ -13,7 +13,9 @@
         </div>
         <div class="contact-details">
           <h4>Email</h4>
-          <a href="mailto:manriquez01.v@gmail.com">manriquez01.v@gmail.com</a>
+          <a href="mailto:valeria.manriquez90@gmail.com"
+            >valeria.manriquez90@gmail.com</a
+          >
         </div>
       </div>
 
@@ -39,14 +41,17 @@
     </div>
 
     <div class="social-links">
-      <a href="#" class="social-link">
+      <a href="https://github.com/Dhamary08" class="social-link">
         <IconImg name="github" />
       </a>
-      <a href="#" class="social-link">
+      <a
+        href="https://www.linkedin.com/in/valeria-manriquez"
+        class="social-link"
+      >
         <IconImg name="linkedin" />
       </a>
       <a href="#" class="social-link">
-        <IconImg name="twitter" />
+        <IconImg name="mail" />
       </a>
     </div>
   </div>

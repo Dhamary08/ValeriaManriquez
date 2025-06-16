@@ -43,14 +43,17 @@
         <div class="footer-section">
           <h4 class="section-title">Sígueme</h4>
           <div class="social-links">
-            <a href="#" class="social-link">
+            <a href="https://github.com/Dhamary08" class="social-link">
               <IconImg name="github" />
             </a>
-            <a href="#" class="social-link">
+            <a
+              href="https://www.linkedin.com/in/valeria-manriquez"
+              class="social-link"
+            >
               <IconImg name="linkedin" />
             </a>
-            <a href="#" class="social-link">
-              <IconImg name="twitter" />
+            <a href="mailto:valeria.manriquez90@gmail.com" class="social-link">
+              <IconImg name="mail" />
             </a>
           </div>
         </div>
