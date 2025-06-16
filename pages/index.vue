@@ -97,7 +97,7 @@
     <!-- Work Section -->
     <section id="work" class="work-section">
       <div class="container">
-        <SectionTitle title="Mi Trabajo" subtitle="Proyectos destacados" />
+        <SectionTitle title="Mi Portafolio" subtitle="Proyectos destacados" />
         <div class="projects-grid">
           <ProjectCard
             v-for="project in projects"
