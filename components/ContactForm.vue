@@ -16,6 +16,7 @@
         :class="{ error: errors.name }"
         placeholder="Tu nombre completo"
         required
+        name="name"
       />
       <span v-if="errors.name" class="error-message">{{ errors.name }}</span>
     </div>
@@ -30,6 +31,7 @@
         :class="{ error: errors.email }"
         placeholder="tu@email.com"
         required
+        name="email"
       />
       <span v-if="errors.email" class="error-message">{{ errors.email }}</span>
     </div>
@@ -44,6 +46,7 @@
         :class="{ error: errors.subject }"
         placeholder="Asunto del mensaje"
         required
+        name="subject"
       />
       <span v-if="errors.subject" class="error-message">{{
         errors.subject
@@ -60,6 +63,7 @@
         placeholder="Cuéntame sobre tu proyecto..."
         rows="5"
         required
+        name="message"
       ></textarea>
       <span v-if="errors.message" class="error-message">{{
         errors.message
