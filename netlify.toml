@@ -2,6 +2,7 @@
   command = "npm run generate"
   publish = "dist"
 
+# Configuración para formularios
 [build.environment]
   NODE_VERSION = "18"
 
@@ -27,12 +28,49 @@
   to = "/contact-success.html"
   status = 200
 
+# Configuración de formularios de Netlify
+[forms]
+  # Configuración global para todos los formularios
+  [forms.settings]
+    # Habilitar notificaciones por email
+    email = true
+    # Habilitar protección contra spam
+    spam_protection = true
+
+# Configuración específica del formulario de contacto
+[forms.settings]
+  name = "contact"
+  action = "/contact-success.html"
+  
+# Configuración de notificaciones
+	[forms.notifications]
+# Notificación por email al recibir un mensaje
+[[forms.notifications.email]]
+	to = "vake08@gmail.com"  # Cambiar por tu email
+	subject = "Nuevo mensaje de contacto desde tu portfolio"
+	template = """
+	Has recibido un nuevo mensaje de contacto:
+	
+	Nombre: {{ name }}
+	Email: {{ email }}
+	Asunto: {{ subject }}
+	
+	Mensaje:
+	{{ message }}
+	
+	---
+	Información adicional:
+	Fecha: {{ timestamp }}
+	Navegador: {{ user-agent }}
+	Página: {{ page-url }}
+	"""
+
 # Variables de entorno para diferentes contextos
 [context.production.environment]
-  NUXT_PUBLIC_SITE_URL = "https://tu-dominio.netlify.app"
+  NUXT_PUBLIC_SITE_URL = "https://valeriamanriquez.cl/"
 
-[context.deploy-preview.environment]
-  NUXT_PUBLIC_SITE_URL = "https://deploy-preview-$REVIEW_ID--tu-sitio.netlify.app"
+#[context.deploy-preview.environment]
+  #NUXT_PUBLIC_SITE_URL = "https://deploy-preview-$REVIEW_ID--tu-sitio.netlify.app"
 
-[context.branch-deploy.environment]
-  NUXT_PUBLIC_SITE_URL = "https://$BRANCH--tu-sitio.netlify.app"
+#[context.branch-deploy.environment]
+  #NUXT_PUBLIC_SITE_URL = "https://$BRANCH--tu-sitio.netlify.app"
