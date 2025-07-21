@@ -3,6 +3,7 @@
     data-netlify="true"
     method="post"
     action="/"
+    name="contact"
     class="contact-form"
     @submit.prevent="handleSubmit"
   >
@@ -63,6 +64,7 @@
         placeholder="Cuéntame sobre tu proyecto..."
         rows="5"
         required
+        type="text"
         name="message"
       ></textarea>
       <span v-if="errors.message" class="error-message">{{
