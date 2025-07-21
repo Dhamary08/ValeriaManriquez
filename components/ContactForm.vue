@@ -1,5 +1,11 @@
 <template>
-  <form class="contact-form" @submit.prevent="handleSubmit">
+  <form
+    data-netlify="true"
+    method="post"
+    action="/"
+    class="contact-form"
+    @submit.prevent="handleSubmit"
+  >
     <div class="form-group">
       <label for="name" class="form-label">Nombre</label>
       <input
