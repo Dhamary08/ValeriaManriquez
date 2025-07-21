@@ -31,13 +31,12 @@
 # Configuración de formularios de Netlify
 
 # Configuración global para todos los formularios
-[forms.settings]
-	email = true
-	spam_protection = true
-	name = "contact"
-	action = "/contact-success.html"
 		
 [[forms]]
+  name = "contact"
+  action = "/contact-success.html"
+  email = true
+  spam_protection = true
   [forms.notifications]
     [[forms.notifications.email]]
       to = "vake08@gmail.com"
