@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mensaje Enviado - Portfolio</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: white;
+		}
+
+		.container {
+			text-align: center;
+			max-width: 500px;
+			padding: 2rem;
+			background: rgba(255, 255, 255, 0.1);
+			border-radius: 20px;
+			backdrop-filter: blur(10px);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+		}
+
+		.success-icon {
+			width: 80px;
+			height: 80px;
+			background: #22c55e;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 0 auto 2rem;
+			font-size: 2rem;
+		}
+
+		h1 {
+			font-size: 2rem;
+			margin-bottom: 1rem;
+			font-weight: 600;
+		}
+
+		p {
+			font-size: 1.1rem;
+			line-height: 1.6;
+			margin-bottom: 2rem;
+			opacity: 0.9;
+		}
+
+		.btn {
+			display: inline-block;
+			padding: 0.75rem 2rem;
+			background: white;
+			color: #667eea;
+			text-decoration: none;
+			border-radius: 50px;
+			font-weight: 500;
+			transition: all 0.3s ease;
+		}
+
+		.btn:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+		}
+
+		.details {
+			margin-top: 2rem;
+			padding: 1rem;
+			background: rgba(255, 255, 255, 0.1);
+			border-radius: 10px;
+			font-size: 0.9rem;
+			opacity: 0.8;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="success-icon">✓</div>
+		<h1>¡Mensaje Enviado!</h1>
+		<p>
+			Gracias por contactarme. He recibido tu mensaje y te responderé
+			lo antes posible, generalmente dentro de las próximas 24 horas.
+		</p>
+		<a href="/" class="btn">Volver al Portfolio</a>
+
+		<div class="details">
+			<p><strong>¿Qué sigue?</strong></p>
+			<p>• Revisaré tu mensaje cuidadosamente</p>
+			<p>• Te responderé con una propuesta detallada</p>
+			<p>• Programaremos una llamada si es necesario</p>
+		</div>
+	</div>
+
+	<script>
+		// Redirect después de 10 segundos
+		setTimeout(() => {
+			window.location.href = '/';
+		}, 10000);
+
+		// Track success page view si Clarity está disponible
+		if (window.clarity) {
+			window.clarity('event', 'contact_success_page_view');
+		}
+	</script>
+</body>
+
+</html>

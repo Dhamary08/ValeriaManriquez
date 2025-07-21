@@ -1,10 +1,27 @@
 <template>
-  <form class="contact-form" @submit.prevent="handleSubmit">
+  <form
+    class="contact-form"
+    name="contact"
+    method="POST"
+    data-netlify="true"
+    data-netlify-honeypot="bot-field"
+    @submit.prevent="handleSubmit"
+  >
+    <!-- Campo honeypot para prevenir spam -->
+    <input type="hidden" name="form-name" value="contact" />
+    <div style="display: none">
+      <label>
+        Don't fill this out if you're human:
+        <input name="bot-field" />
+      </label>
+    </div>
+
     <div class="form-group">
       <label for="name" class="form-label">Nombre</label>
       <input
         id="name"
         v-model="form.name"
+        name="name"
         type="text"
         class="form-input"
         :class="{ error: errors.name }"
@@ -19,6 +36,7 @@
       <input
         id="email"
         v-model="form.email"
+        name="email"
         type="email"
         class="form-input"
         :class="{ error: errors.email }"
@@ -33,6 +51,7 @@
       <input
         id="subject"
         v-model="form.subject"
+        name="subject"
         type="text"
         class="form-input"
         :class="{ error: errors.subject }"
@@ -49,6 +68,7 @@
       <textarea
         id="message"
         v-model="form.message"
+        name="message"
         class="form-textarea"
         :class="{ error: errors.message }"
         placeholder="Cuéntame sobre tu proyecto..."
@@ -60,11 +80,17 @@
       }}</span>
     </div>
 
+    <!-- Campo adicional para información del navegador -->
+    <input type="hidden" name="user-agent" :value="userAgent" />
+    <input type="hidden" name="timestamp" :value="timestamp" />
+    <input type="hidden" name="page-url" :value="pageUrl" />
+
     <BaseButton
       type="submit"
       variant="primary"
       size="large"
       :loading="isSubmitting"
+      :disabled="isSubmitting"
       class="submit-button"
     >
       {{ isSubmitting ? "Enviando..." : "Enviar Mensaje" }}
@@ -77,7 +103,7 @@
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { useClarity } from "~/composables/useClarity";
 
 const { trackEvent, upgradeSession } = useClarity();
@@ -93,6 +119,16 @@ const errors = ref({});
 const isSubmitting = ref(false);
 const submitMessage = ref("");
 const submitStatus = ref("");
+const userAgent = ref("");
+const timestamp = ref("");
+const pageUrl = ref("");
+
+// Función para codificar datos del formulario
+const encode = (data) => {
+  return Object.keys(data)
+    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+};
 
 const validateForm = () => {
   errors.value = {};
@@ -119,7 +155,13 @@ const validateForm = () => {
 };
 
 const handleSubmit = async () => {
-  if (!validateForm()) return;
+  if (!validateForm()) {
+    // Track validation errors
+    trackEvent("contact_form_validation_error", {
+      errors: Object.keys(errors.value),
+    });
+    return;
+  }
 
   isSubmitting.value = true;
 
@@ -131,33 +173,58 @@ const handleSubmit = async () => {
   });
 
   try {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    submitMessage.value =
-      "¡Mensaje enviado correctamente! Te responderé pronto.";
-    submitStatus.value = "success";
-
-    // Track successful submission
-    trackEvent("contact_form_submit_success", {
+    // Preparar datos para Netlify
+    const formData = {
+      "form-name": "contact",
+      name: form.name,
       email: form.email,
       subject: form.subject,
+      message: form.message,
+      "user-agent": userAgent.value,
+      timestamp: timestamp.value,
+      "page-url": pageUrl.value,
+    };
+
+    // Enviar a Netlify
+    const response = await fetch("/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: encode(formData),
     });
 
-    // Upgrade session for successful contact
-    upgradeSession();
+    if (response.ok) {
+      submitMessage.value =
+        "¡Mensaje enviado correctamente! Te responderé pronto.";
+      submitStatus.value = "success";
 
-    // Reset form
-    Object.keys(form).forEach((key) => {
-      form[key] = "";
-    });
+      // Track successful submission
+      trackEvent("contact_form_submit_success", {
+        email: form.email,
+        subject: form.subject,
+        submission_method: "netlify_forms",
+      });
+
+      // Upgrade session for successful contact
+      upgradeSession();
+
+      // Reset form
+      Object.keys(form).forEach((key) => {
+        form[key] = "";
+      });
+    } else {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
   } catch (error) {
+    console.error("Error submitting form:", error);
     submitMessage.value = "Error al enviar el mensaje. Inténtalo de nuevo.";
     submitStatus.value = "error";
 
     // Track form submission error
     trackEvent("contact_form_submit_error", {
       error: error.message || "Unknown error",
+      submission_method: "netlify_forms",
     });
   } finally {
     isSubmitting.value = false;
@@ -169,6 +236,13 @@ const handleSubmit = async () => {
     }, 5000);
   }
 };
+
+onMounted(() => {
+  // Capturar información del navegador y página
+  userAgent.value = navigator.userAgent;
+  timestamp.value = new Date().toISOString();
+  pageUrl.value = window.location.href;
+});
 </script>
 
 <style lang="scss" scoped>

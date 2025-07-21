@@ -5,6 +5,8 @@
       <slot></slot>
     </main>
     <AppFooter />
+    <!-- Incluir formulario estático para detección de Netlify -->
+    <ContactFormStatic />
   </div>
 </template>
 
