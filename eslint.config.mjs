@@ -1,7 +1,13 @@
 // @ts-check
 import withNuxt from "./.nuxt/eslint.config.mjs";
+import clarity from "@microsoft/clarity";
 
 export default withNuxt({
+  // Configuración de Clarity
+  /* clarity: {
+    projectId: "your-clarity-project-id", // Reemplaza con tu ID de proyecto de Clarity
+    enable: true, // Habilita Clarity
+  }, */
   // Ignorar carpetas o archivos específicos
   ignores: ["dist", "node_modules", ".output", ".nuxt"],
 

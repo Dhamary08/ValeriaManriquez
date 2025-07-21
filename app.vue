@@ -1,5 +1,7 @@
 <template>
   <div id="app" :class="{ 'dark-mode': isDarkMode }">
+    <!-- Componente de estado de Clarity (solo en desarrollo) -->
+    <ClarityStatus v-if="$config.public.clarityProjectId" />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
@@ -9,6 +11,7 @@
 <script setup>
 import { useTheme } from "~/composables/useTheme";
 import { useHead } from "#app";
+import ClarityStatus from "~/components/ClarityStatus.vue";
 
 const { isDarkMode } = useTheme();
 
@@ -20,7 +23,7 @@ useHead({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 * {
   margin: 0;
   padding: 0;

@@ -1,12 +1,5 @@
 <template>
-  <form
-    data-netlify="true"
-    method="post"
-    action="/"
-    name="contact"
-    class="contact-form"
-    @submit.prevent="handleSubmit"
-  >
+  <form class="contact-form" @submit.prevent="handleSubmit">
     <div class="form-group">
       <label for="name" class="form-label">Nombre</label>
       <input
@@ -17,7 +10,6 @@
         :class="{ error: errors.name }"
         placeholder="Tu nombre completo"
         required
-        name="name"
       />
       <span v-if="errors.name" class="error-message">{{ errors.name }}</span>
     </div>
@@ -32,7 +24,6 @@
         :class="{ error: errors.email }"
         placeholder="tu@email.com"
         required
-        name="email"
       />
       <span v-if="errors.email" class="error-message">{{ errors.email }}</span>
     </div>
@@ -47,7 +38,6 @@
         :class="{ error: errors.subject }"
         placeholder="Asunto del mensaje"
         required
-        name="subject"
       />
       <span v-if="errors.subject" class="error-message">{{
         errors.subject
@@ -64,8 +54,6 @@
         placeholder="Cuéntame sobre tu proyecto..."
         rows="5"
         required
-        type="text"
-        name="message"
       ></textarea>
       <span v-if="errors.message" class="error-message">{{
         errors.message
@@ -90,6 +78,9 @@
 
 <script setup>
 import { ref, reactive } from "vue";
+import { useClarity } from "~/composables/useClarity";
+
+const { trackEvent, upgradeSession } = useClarity();
 
 const form = reactive({
   name: "",
@@ -132,6 +123,13 @@ const handleSubmit = async () => {
 
   isSubmitting.value = true;
 
+  // Track form submission attempt
+  trackEvent("contact_form_submit_attempt", {
+    email: form.email,
+    subject: form.subject,
+    message_length: form.message.length,
+  });
+
   try {
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -140,14 +138,27 @@ const handleSubmit = async () => {
       "¡Mensaje enviado correctamente! Te responderé pronto.";
     submitStatus.value = "success";
 
+    // Track successful submission
+    trackEvent("contact_form_submit_success", {
+      email: form.email,
+      subject: form.subject,
+    });
+
+    // Upgrade session for successful contact
+    upgradeSession();
+
     // Reset form
     Object.keys(form).forEach((key) => {
       form[key] = "";
     });
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     submitMessage.value = "Error al enviar el mensaje. Inténtalo de nuevo.";
     submitStatus.value = "error";
+
+    // Track form submission error
+    trackEvent("contact_form_submit_error", {
+      error: error.message || "Unknown error",
+    });
   } finally {
     isSubmitting.value = false;
 

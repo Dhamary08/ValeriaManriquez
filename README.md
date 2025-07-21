@@ -2,6 +2,8 @@
 
 Un sitio web de portafolio personal moderno y elegante desarrollado con **Nuxt 3**, **Vue 3** y **GSAP**, diseñado para mostrar experiencia profesional, habilidades y proyectos de manera impactante.
 
+![Portfolio Preview](https://via.placeholder.com/800x400/3b82f6/ffffff?text=Portfolio+Preview)
+
 ## ✨ Características Principales
 
 ### 🎨 **Diseño y UX**
@@ -42,7 +44,7 @@ Un sitio web de portafolio personal moderno y elegante desarrollado con **Nuxt 3
 
 # Clonar el repositorio
 
-git clone https://github.com/Dhamary08/ValeriaManriquez.git
+git clone https://github.com/tu-usuario/portfolio-nuxt.git
 cd portfolio-nuxt
 
 # Instalar dependencias
@@ -74,7 +76,7 @@ Para producción:
 
 # .env.production
 
-NUXT_PUBLIC_SITE_URL=https://valeriamanriquez.cl
+NUXT_PUBLIC_SITE_URL=https://tu-dominio.com
 \`\`\`
 
 ### Comandos Disponibles
@@ -114,21 +116,21 @@ portfolio-nuxt/
 │ └── 📁 scss/
 │ ├── main.scss # Archivo principal de estilos
 │ ├── 📁 abstracts/
-│ │ ├── \_variables.scss # Variables CSS y SCSS
-│ │ └── \_mixins.scss # Mixins reutilizables
+│ │ ├──_variables.scss # Variables CSS y SCSS
+│ │ └──_mixins.scss # Mixins reutilizables
 │ ├── 📁 base/
-│ │ ├── \_reset.scss # Reset CSS
-│ │ └── \_typography.scss # Tipografía base
+│ │ ├──_reset.scss # Reset CSS
+│ │ └──_typography.scss # Tipografía base
 │ ├── 📁 components/
-│ │ ├── \_button.scss # Estilos de botones
-│ │ └── \_header.scss # Estilos del header
+│ │ ├──_button.scss # Estilos de botones
+│ │ └──_header.scss # Estilos del header
 │ ├── 📁 layout/
-│ │ ├── \_container.scss # Contenedores
-│ │ └── \_grid.scss # Sistema de grid
+│ │ ├──_container.scss # Contenedores
+│ │ └──_grid.scss # Sistema de grid
 │ ├── 📁 pages/
-│ │ └── \_home.scss # Estilos de la página principal
+│ │ └──_home.scss # Estilos de la página principal
 │ └── 📁 themes/
-│ ├── \_light.scss # Tema claro
+│ ├──_light.scss # Tema claro
 │ └── \_dark.scss # Tema oscuro
 ├── 📁 components/
 │ ├── AppHeader.vue # Header principal
@@ -300,7 +302,7 @@ start: 'top 80%'
 1. **Conectar repositorio** a Vercel
 2. **Configurar variables de entorno**:
    \`\`\`
-   NUXT_PUBLIC_SITE_URL=https://valeriamanriquez.cl
+   NUXT_PUBLIC_SITE_URL=https://tu-dominio.vercel.app
    \`\`\`
 3. **Deploy automático** en cada push
 
@@ -471,12 +473,82 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 
 ## 📞 Contacto
 
-**Tu Nombre** - Valeria Manriquez
+**Tu Nombre** - [@tu_twitter](https://twitter.com/tu_twitter) - tu@email.com
 
-**Link del Proyecto**: [https://github.com/Dhamary08/ValeriaManriquez](https://github.com/Dhamary08/ValeriaManriquez)
+**Link del Proyecto**: [https://github.com/tu-usuario/portfolio-nuxt](https://github.com/tu-usuario/portfolio-nuxt)
 
-**Demo en Vivo**: [https://valeriamanriquez.cl](https://valeriamanriquez.cl)
+**Demo en Vivo**: [https://tu-portfolio.vercel.app](https://tu-portfolio.vercel.app)
 
 ---
 
 ⭐ **¡No olvides dar una estrella al proyecto si te ha sido útil!** ⭐
+
+## 📊 Microsoft Clarity - Análisis de Comportamiento
+
+Este proyecto incluye **Microsoft Clarity** para análisis avanzado del comportamiento de usuarios, incluyendo mapas de calor y grabaciones de sesiones.
+
+### Configuración de Clarity
+
+1. **Crear cuenta en Clarity**:
+
+   - Visita [Microsoft Clarity](https://clarity.microsoft.com/)
+   - Crea una cuenta gratuita
+   - Agrega tu sitio web
+   - Obtén tu Project ID
+
+2. **Configurar variables de entorno**:
+   \`\`\`env
+
+   # .env
+
+   NUXT_CLARITY_PROJECT_ID=tu_project_id_aqui
+   \`\`\`
+
+3. **Eventos personalizados incluidos**:
+   - **Envío de formulario de contacto**
+   - **Clicks en proyectos** (demo y código)
+   - **Cambios de tema** (oscuro/claro)
+   - **Navegación entre secciones**
+
+### Funcionalidades de Tracking
+
+#### Eventos Automáticos
+
+- ✅ **Page Views**: Automático en cada navegación
+- ✅ **Form Interactions**: Formulario de contacto
+- ✅ **Button Clicks**: CTAs y enlaces importantes
+- ✅ **Theme Changes**: Modo oscuro/claro
+
+#### Eventos Personalizados
+
+\`\`\`javascript
+// Usar el composable useClarity
+const { trackEvent, identifyUser, setCustomTag } = useClarity()
+
+// Trackear evento personalizado
+trackEvent('custom_event', { data: 'value' })
+
+// Identificar usuario
+identifyUser('user123', { plan: 'premium' })
+
+// Establecer tag personalizado
+setCustomTag('user_type', 'developer')
+\`\`\`
+
+### Componente de Debug
+
+En desarrollo, se incluye un componente `ClarityStatus` que muestra:
+
+- Estado de conexión con Clarity
+- Project ID configurado
+- Contador de eventos
+- Botones de prueba
+
+### Privacy y GDPR
+
+Clarity es **gratuito** y **compatible con GDPR**:
+
+- No requiere banner de cookies
+- Datos anonimizados automáticamente
+- Cumple con regulaciones de privacidad
+- Microsoft maneja el procesamiento de datos

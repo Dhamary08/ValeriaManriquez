@@ -1,12 +1,12 @@
 <template>
   <button
     class="theme-toggle"
+    @click="handleToggleTheme"
     :aria-label="isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
-    @click="toggleTheme"
   >
     <div class="toggle-track">
       <div class="toggle-thumb" :class="{ dark: isDarkMode }">
-        <IconImg :name="isDarkMode ? 'moon' : 'sun'" />
+        <Icon :name="isDarkMode ? 'moon' : 'sun'" />
       </div>
     </div>
   </button>
@@ -14,8 +14,25 @@
 
 <script setup>
 import { useTheme } from "@/composables/useTheme";
+import { useClarity } from "~/composables/useClarity";
 
 const { isDarkMode, toggleTheme } = useTheme();
+const { trackEvent, setCustomTag } = useClarity();
+
+const handleToggleTheme = () => {
+  const newTheme = !isDarkMode.value ? "dark" : "light";
+
+  // Track theme change
+  trackEvent("theme_toggle", {
+    from_theme: isDarkMode.value ? "dark" : "light",
+    to_theme: newTheme,
+  });
+
+  // Set custom tag for current theme
+  setCustomTag("theme", newTheme);
+
+  toggleTheme();
+};
 </script>
 
 <style lang="scss" scoped>
@@ -51,7 +68,7 @@ const { isDarkMode, toggleTheme } = useTheme();
         transform: translateX(24px);
       }
 
-      :deep(svg) {
+      svg {
         width: 12px;
         height: 12px;
         color: white;

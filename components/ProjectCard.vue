@@ -1,15 +1,25 @@
 <template>
-  <div class="project-card">
+  <div class="project-card" @mouseenter="trackProjectView(project)">
     <div class="project-image">
       <img :src="project.image" :alt="project.title" />
       <div class="project-overlay">
         <div class="project-actions">
-          <a :href="project.demoUrl" class="action-btn demo" target="_blank">
-            <IconImg name="external-link" />
+          <a
+            :href="project.demoUrl"
+            class="action-btn demo"
+            target="_blank"
+            @click="trackProjectDemo(project)"
+          >
+            <Icon name="external-link" />
             <span>Demo</span>
           </a>
-          <a :href="project.codeUrl" class="action-btn code" target="_blank">
-            <IconImg name="github" />
+          <a
+            :href="project.codeUrl"
+            class="action-btn code"
+            target="_blank"
+            @click="trackProjectCode(project)"
+          >
+            <Icon name="github" />
             <span>Código</span>
           </a>
         </div>
@@ -30,6 +40,31 @@
 </template>
 
 <script setup>
+import { useClarity } from "~/composables/useClarity";
+
+const { trackEvent } = useClarity();
+
+const trackProjectView = (project) => {
+  trackEvent("project_card_view", {
+    project_title: project.title,
+    project_technologies: project.technologies.join(", "),
+  });
+};
+
+const trackProjectDemo = (project) => {
+  trackEvent("project_demo_click", {
+    project_title: project.title,
+    demo_url: project.demoUrl,
+  });
+};
+
+const trackProjectCode = (project) => {
+  trackEvent("project_code_click", {
+    project_title: project.title,
+    code_url: project.codeUrl,
+  });
+};
+
 defineProps({
   project: {
     type: Object,
@@ -101,7 +136,7 @@ defineProps({
             transform: translateY(-2px);
           }
 
-          :deep(svg) {
+          svg {
             width: 16px;
             height: 16px;
           }
