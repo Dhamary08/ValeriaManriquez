@@ -66,7 +66,7 @@
           <div class="about-image">
             <div class="image-container">
               <img
-                src="/placeholder.svg?height=400&width=300"
+                src="/placeholder.png?height=400&width=300"
                 alt="Foto personal"
               />
             </div>
