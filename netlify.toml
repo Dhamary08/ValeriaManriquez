@@ -1,5 +1,5 @@
 [build]
-  command = "npm run generate"
+  command = "npm build"
   publish = "dist"
 
 # Configuración para formularios
