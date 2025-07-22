@@ -3,8 +3,10 @@ import { useRuntimeConfig } from "#app";
 export const useClarity = () => {
   const config = useRuntimeConfig();
 
+  const isClient = typeof window !== "undefined";
+
   const initClarity = () => {
-    if (!process.client || !config.public.clarityProjectId) return;
+    if (!isClient || !config.public.clarityProjectId) return;
 
     // Verificar si Clarity ya está inicializado
     if (window.clarity) {
@@ -29,7 +31,7 @@ export const useClarity = () => {
   };
 
   const trackEvent = (eventName, eventData = {}) => {
-    if (!process.client || !window.clarity) return;
+    if (!isClient || !window.clarity) return;
 
     try {
       window.clarity("event", eventName, eventData);
@@ -40,7 +42,7 @@ export const useClarity = () => {
   };
 
   const identifyUser = (userId, sessionData = {}) => {
-    if (!process.client || !window.clarity) return;
+    if (!isClient || !window.clarity) return;
 
     try {
       window.clarity("identify", userId, sessionData);
@@ -51,7 +53,7 @@ export const useClarity = () => {
   };
 
   const setCustomTag = (key, value) => {
-    if (!process.client || !window.clarity) return;
+    if (!isClient || !window.clarity) return;
 
     try {
       window.clarity("set", key, value);
@@ -62,7 +64,7 @@ export const useClarity = () => {
   };
 
   const upgradeSession = () => {
-    if (!process.client || !window.clarity) return;
+    if (!isClient || !window.clarity) return;
 
     try {
       window.clarity("upgrade");
