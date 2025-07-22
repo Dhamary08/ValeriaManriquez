@@ -87,7 +87,7 @@
             <div class="about-image">
               <div class="image-container">
                 <LazyImage
-                  src="/user-1.svg?height=400&width=300&text=Foto+Personal"
+                  src="/user-1.png"
                   alt="Foto personal del desarrollador"
                   width="300"
                   height="400"
@@ -209,7 +209,7 @@
 
 <script setup>
 import { ref, onMounted, nextTick } from "vue";
-import { useHead } from "@vueuse/head";
+import { useHead } from "#app";
 import { useErrorHandler } from "~/composables/useErrorHandler";
 import { usePerformance } from "~/composables/usePerformance";
 import { useGsapAnimations } from "~/composables/useGsapAnimations";

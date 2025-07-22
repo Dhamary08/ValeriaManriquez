@@ -46,12 +46,19 @@ export const useTheme = () => {
 
       // Escuchar cambios en la preferencia del sistema
       const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-      mediaQuery.addEventListener("change", (e) => {
+      const handleChange = (e) => {
         if (!localStorage.getItem("theme")) {
           isDarkMode.value = e.matches;
           updateTheme();
         }
-      });
+      };
+
+      mediaQuery.addEventListener("change", handleChange);
+
+      // Cleanup function
+      return () => {
+        mediaQuery.removeEventListener("change", handleChange);
+      };
     }
   };
 

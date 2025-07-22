@@ -3,7 +3,7 @@
     <!-- Error Boundary para toda la aplicación -->
     <ErrorBoundary>
       <!-- Componente de estado de Clarity (solo en desarrollo) -->
-      <ClarityStatus v-if="showClarityStatus" />
+      <ClarityStatus />
 
       <NuxtLayout>
         <NuxtPage />
@@ -17,6 +17,7 @@ import { useTheme } from "~/composables/useTheme";
 import { useHead } from "#app";
 import { computed, onMounted } from "vue";
 import { useRuntimeConfig } from "#app";
+import ClarityStatus from "~/components/ClarityStatus.vue";
 
 // SEO mejorado
 useHead({

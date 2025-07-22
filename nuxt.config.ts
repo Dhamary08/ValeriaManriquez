@@ -46,12 +46,13 @@ export default defineNuxtConfig({
     {
       path: "~/components",
       pathPrefix: false,
+      global: true,
     },
   ],
 
   // Auto-import composables
   imports: {
-    dirs: ["composables/**"],
+    dirs: ["composables", "composables/**", "utils", "utils/**"],
   },
 
   // SEO Configuration mejorado

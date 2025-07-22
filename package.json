@@ -21,7 +21,6 @@
     "@nuxt/scripts": "^0.11.8",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@unhead/vue": "^2.0.10",
-    "@vueuse/head": "^2.0.0",
     "gsap": "^3.13.0",
     "lucide-vue-next": "^0.514.0",
     "vite-tsconfig-paths": "^5.1.4",
