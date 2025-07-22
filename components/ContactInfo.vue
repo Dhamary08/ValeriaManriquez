@@ -13,9 +13,7 @@
         </div>
         <div class="contact-details">
           <h4>Email</h4>
-          <a href="mailto:valeria.manriquez90@gmail.com"
-            >valeria.manriquez90@gmail.com</a
-          >
+          <a href="mailto:valeria@dhamy.cl">valeria@dhamy.cl</a>
         </div>
       </div>
 

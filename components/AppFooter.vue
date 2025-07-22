@@ -52,7 +52,7 @@
             >
               <IconImg name="linkedin" />
             </a>
-            <a href="mailto:valeria.manriquez90@gmail.com" class="social-link">
+            <a href="mailto:valeria@dhamy.cl" class="social-link">
               <IconImg name="mail" />
             </a>
           </div>
