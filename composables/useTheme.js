@@ -1,7 +1,9 @@
 import { ref, readonly, onMounted } from "vue";
 
+const isDarkMode = ref(false);
+
 export const useTheme = () => {
-  const isDarkMode = ref(false);
+  const isClient = typeof window !== "undefined";
 
   const toggleTheme = () => {
     isDarkMode.value = !isDarkMode.value;
@@ -9,21 +11,47 @@ export const useTheme = () => {
   };
 
   const updateTheme = () => {
-    if (import.meta.client) {
-      document.documentElement.classList.toggle("dark-mode", isDarkMode.value);
+    if (isClient) {
+      const htmlElement = document.documentElement;
+
+      if (isDarkMode.value) {
+        htmlElement.classList.add("dark-mode");
+      } else {
+        htmlElement.classList.remove("dark-mode");
+      }
+
+      // Guardar preferencia en localStorage
       localStorage.setItem("theme", isDarkMode.value ? "dark" : "light");
     }
   };
 
   const initTheme = () => {
-    if (import.meta.client) {
+    if (isClient) {
+      // Verificar preferencia guardada
       const savedTheme = localStorage.getItem("theme");
+
+      // Verificar preferencia del sistema
       const prefersDark = window.matchMedia(
         "(prefers-color-scheme: dark)"
       ).matches;
 
-      isDarkMode.value = savedTheme ? savedTheme === "dark" : prefersDark;
+      // Establecer tema inicial
+      if (savedTheme) {
+        isDarkMode.value = savedTheme === "dark";
+      } else {
+        isDarkMode.value = prefersDark;
+      }
+
       updateTheme();
+
+      // Escuchar cambios en la preferencia del sistema
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      mediaQuery.addEventListener("change", (e) => {
+        if (!localStorage.getItem("theme")) {
+          isDarkMode.value = e.matches;
+          updateTheme();
+        }
+      });
     }
   };
 
@@ -34,5 +62,6 @@ export const useTheme = () => {
   return {
     isDarkMode: readonly(isDarkMode),
     toggleTheme,
+    initTheme,
   };
 };

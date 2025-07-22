@@ -14,7 +14,7 @@
 
 <script setup>
 import { useTheme } from "@/composables/useTheme";
-import { useClarity } from "~/composables/useClarity";
+import { useClarity } from "@/composables/useClarity";
 
 const { isDarkMode, toggleTheme } = useTheme();
 const { trackEvent, setCustomTag } = useClarity();
@@ -66,14 +66,19 @@ const handleToggleTheme = () => {
 
       &.dark {
         transform: translateX(24px);
+        background: var(--accent-secondary);
       }
 
-      svg {
+      :deep(svg) {
         width: 12px;
         height: 12px;
         color: white;
       }
     }
+  }
+
+  &:hover .toggle-track {
+    border-color: var(--accent-color);
   }
 }
 </style>
