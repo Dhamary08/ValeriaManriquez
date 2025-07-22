@@ -58,6 +58,9 @@
             <a href="mailto:valeria@dhamy.cl" class="social-link">
               <IconImg name="mail" />
             </a>
+            <a href="https://dhamy.cl" target="_blank" class="social-link">
+              <IconImg name="web" />
+            </a>
           </div>
         </div>
       </div>

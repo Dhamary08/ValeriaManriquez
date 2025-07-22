@@ -17,15 +17,15 @@
         </div>
       </div>
 
-      <!--  <div class="contact-item">
+      <div class="contact-item">
         <div class="contact-icon">
-          <IconImg name="phone" />
+          <IconImg name="www" />
         </div>
         <div class="contact-details">
-          <h4>Teléfono</h4>
-          <a href="tel:+1234567890">+123 456 7890</a>
+          <h4>Sitio</h4>
+          <a href="https://dhamy.cl" target="_blank">dhamy.cl</a>
         </div>
-      </div> -->
+      </div>
 
       <div class="contact-item">
         <div class="contact-icon">
@@ -50,6 +50,9 @@
       </a>
       <a href="#" class="social-link">
         <IconImg name="mail" />
+      </a>
+      <a href="https://dhamy.cl" target="_blank" class="social-link">
+        <IconImg name="web" />
       </a>
     </div>
   </div>
