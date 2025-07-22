@@ -80,8 +80,3 @@ onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
 });
 </script>
-
-<!-- <style lang="scss" scoped>
-@import "~/assets/scss/components/header.scss";
-</style>
- -->

@@ -5,8 +5,11 @@
         <div class="footer-section">
           <h3 class="footer-title">Portfolio</h3>
           <p class="footer-description">
-            Desarrollador frontend especializado en crear experiencias web
-            excepcionales.
+            Desarrolladora frontend apasionada por crear experiencias digitales
+            innovadoras y funcionales. Descubre más sobre mi trabajo en
+            <a href="https://dhamy.cl/" class="a-link" target="_blank">
+              dhamy.cl</a
+            >.
           </p>
         </div>
 
