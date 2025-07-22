@@ -6,6 +6,9 @@
         <NuxtPage />
       </NuxtLayout>
     </ErrorBoundary>
+
+    <!-- Global Error Handler -->
+    <GlobalErrorHandler />
   </div>
 </template>
 
@@ -16,14 +19,35 @@ import {
   useHead,
   computed,
   onMounted,
+  onErrorCaptured,
 } from "#imports";
-import ClarityStatus from "~/components/ClarityStatus.vue";
-import { useNuxtApp } from "#app";
+import { useErrorHandler } from "~/composables/useErrorHandler";
 
 // Auto-imports ya no necesitan importación explícita
 const nuxtApp = useNuxtApp();
 const { isDarkMode, initTheme } = useTheme();
 const config = useRuntimeConfig();
+const { handleCriticalError } = useErrorHandler();
+
+// Global error handler
+onErrorCaptured((error, instance, info) => {
+  handleCriticalError(error, `Global: ${info}`);
+  return false;
+});
+
+// Unhandled promise rejections
+const handleUnhandledRejection = (event) => {
+  handleCriticalError(new Error(event.reason), "Unhandled Promise Rejection");
+};
+
+const handleGlobalJavaScriptError = (event) => {
+  handleCriticalError(event.error, "Global JavaScript Error");
+};
+
+if (process.client) {
+  window.addEventListener("unhandledrejection", handleUnhandledRejection);
+  window.addEventListener("error", handleGlobalJavaScriptError);
+}
 
 // SEO mejorado
 useHead({
