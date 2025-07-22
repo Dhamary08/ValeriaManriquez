@@ -1,10 +1,7 @@
 <template>
   <div id="app">
-    <!-- Error Boundary para toda la aplicación -->
     <ErrorBoundary>
-      <!-- Componente de estado de Clarity (solo en desarrollo) -->
-      <ClarityStatus />
-
+      <ClarityStatus v-if="showClarityStatus" />
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
@@ -13,11 +10,20 @@
 </template>
 
 <script setup>
-import { useTheme } from "~/composables/useTheme";
-import { useHead } from "#app";
-import { computed, onMounted } from "vue";
-import { useRuntimeConfig } from "#app";
+import {
+  useTheme,
+  useRuntimeConfig,
+  useHead,
+  computed,
+  onMounted,
+} from "#imports";
 import ClarityStatus from "~/components/ClarityStatus.vue";
+import { useNuxtApp } from "#app";
+
+// Auto-imports ya no necesitan importación explícita
+const nuxtApp = useNuxtApp();
+const { isDarkMode, initTheme } = useTheme();
+const config = useRuntimeConfig();
 
 // SEO mejorado
 useHead({
@@ -30,13 +36,9 @@ useHead({
   ],
 });
 
-// Inicializar tema
-const { isDarkMode, initTheme } = useTheme();
-const config = useRuntimeConfig();
-
 // Solo mostrar Clarity status en desarrollo
 const showClarityStatus = computed(() => {
-  return process.dev && config.public.clarityProjectId;
+  return nuxtApp.isDev && config.public.clarityProjectId;
 });
 
 // Inicializar tema en el cliente
@@ -44,13 +46,15 @@ onMounted(() => {
   initTheme();
 
   // Soporte para prefers-reduced-motion
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  );
-  if (prefersReducedMotion.matches) {
-    document.documentElement.style.setProperty("--transition-fast", "0s");
-    document.documentElement.style.setProperty("--transition-normal", "0s");
-    document.documentElement.style.setProperty("--transition-slow", "0s");
+  if (typeof window !== "undefined") {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    );
+    if (prefersReducedMotion.matches) {
+      document.documentElement.style.setProperty("--transition-fast", "0s");
+      document.documentElement.style.setProperty("--transition-normal", "0s");
+      document.documentElement.style.setProperty("--transition-slow", "0s");
+    }
   }
 });
 </script>
@@ -65,7 +69,6 @@ onMounted(() => {
 html {
   scroll-behavior: smooth;
 
-  // Respetar preferencia de movimiento reducido
   @media (prefers-reduced-motion: reduce) {
     scroll-behavior: auto;
   }
@@ -75,8 +78,6 @@ body {
   font-family: "Inter", sans-serif;
   line-height: 1.6;
   transition: all var(--transition-normal);
-
-  // Mejorar legibilidad
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -89,13 +90,11 @@ body {
   transition: all var(--transition-normal);
 }
 
-// Focus visible para accesibilidad
 *:focus-visible {
   outline: 2px solid var(--accent-color);
   outline-offset: 2px;
 }
 
-// Skip link para accesibilidad
 .skip-link {
   position: absolute;
   top: -40px;

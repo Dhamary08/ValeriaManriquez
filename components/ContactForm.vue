@@ -5,9 +5,9 @@
     method="POST"
     data-netlify="true"
     data-netlify-honeypot="bot-field"
+    action="/contact-success.html"
     @submit.prevent="handleSubmit"
   >
-    <!-- Campo honeypot para prevenir spam -->
     <input type="hidden" name="form-name" value="contact" />
     <div style="display: none">
       <label>
@@ -80,7 +80,6 @@
       }}</span>
     </div>
 
-    <!-- Campo adicional para información del navegador -->
     <input type="hidden" name="user-agent" :value="userAgent" />
     <input type="hidden" name="timestamp" :value="timestamp" />
     <input type="hidden" name="page-url" :value="pageUrl" />
@@ -103,7 +102,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from "vue";
+import { reactive, ref, onMounted } from "vue";
 import { useClarity } from "~/composables/useClarity";
 
 const { trackEvent, upgradeSession } = useClarity();
@@ -123,7 +122,6 @@ const userAgent = ref("");
 const timestamp = ref("");
 const pageUrl = ref("");
 
-// Función para codificar datos del formulario
 const encode = (data) => {
   return Object.keys(data)
     .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
@@ -156,7 +154,6 @@ const validateForm = () => {
 
 const handleSubmit = async () => {
   if (!validateForm()) {
-    // Track validation errors
     trackEvent("contact_form_validation_error", {
       errors: Object.keys(errors.value),
     });
@@ -165,7 +162,6 @@ const handleSubmit = async () => {
 
   isSubmitting.value = true;
 
-  // Track form submission attempt
   trackEvent("contact_form_submit_attempt", {
     email: form.email,
     subject: form.subject,
@@ -173,7 +169,6 @@ const handleSubmit = async () => {
   });
 
   try {
-    // Preparar datos para Netlify
     const formData = {
       "form-name": "contact",
       name: form.name,
@@ -185,7 +180,6 @@ const handleSubmit = async () => {
       "page-url": pageUrl.value,
     };
 
-    // Enviar a Netlify
     const response = await fetch("/", {
       method: "POST",
       headers: {
@@ -195,24 +189,15 @@ const handleSubmit = async () => {
     });
 
     if (response.ok) {
-      submitMessage.value =
-        "¡Mensaje enviado correctamente! Te responderé pronto.";
-      submitStatus.value = "success";
+      window.location.href = "/contact-success.html";
 
-      // Track successful submission
       trackEvent("contact_form_submit_success", {
         email: form.email,
         subject: form.subject,
         submission_method: "netlify_forms",
       });
 
-      // Upgrade session for successful contact
       upgradeSession();
-
-      // Reset form
-      Object.keys(form).forEach((key) => {
-        form[key] = "";
-      });
     } else {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -221,7 +206,6 @@ const handleSubmit = async () => {
     submitMessage.value = "Error al enviar el mensaje. Inténtalo de nuevo.";
     submitStatus.value = "error";
 
-    // Track form submission error
     trackEvent("contact_form_submit_error", {
       error: error.message || "Unknown error",
       submission_method: "netlify_forms",
@@ -229,7 +213,6 @@ const handleSubmit = async () => {
   } finally {
     isSubmitting.value = false;
 
-    // Clear message after 5 seconds
     setTimeout(() => {
       submitMessage.value = "";
       submitStatus.value = "";
@@ -238,10 +221,11 @@ const handleSubmit = async () => {
 };
 
 onMounted(() => {
-  // Capturar información del navegador y página
-  userAgent.value = navigator.userAgent;
-  timestamp.value = new Date().toISOString();
-  pageUrl.value = window.location.href;
+  if (typeof window !== "undefined") {
+    userAgent.value = navigator.userAgent;
+    timestamp.value = new Date().toISOString();
+    pageUrl.value = window.location.href;
+  }
 });
 </script>
 

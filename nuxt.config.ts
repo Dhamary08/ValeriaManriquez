@@ -41,21 +41,37 @@ export default defineNuxtConfig({
     },
   },
 
-  // Auto-import components y composables
+  // Auto-import components MEJORADO
   components: [
     {
       path: "~/components",
       pathPrefix: false,
       global: true,
     },
+    {
+      path: "~/components/ui",
+      pathPrefix: false,
+      global: true,
+    },
   ],
 
-  // Auto-import composables
+  // Auto-import composables y utilidades COMPLETO
   imports: {
-    dirs: ["composables", "composables/**", "utils", "utils/**"],
+    dirs: [
+      // Composables
+      "composables",
+      "composables/**",
+      // Utils
+      "utils",
+      "utils/**",
+      // Stores si usas Pinia
+      "stores",
+    ],
   },
 
-  // SEO Configuration mejorado
+  // Auto-imports adicionales para Vue y Nuxt
+
+  // SEO Configuration
   app: {
     head: {
       title: "Mi Portafolio Personal - Desarrollador Frontend",
@@ -112,7 +128,6 @@ export default defineNuxtConfig({
           rel: "canonical",
           href: process.env.NUXT_PUBLIC_SITE_URL || "http://localhost:3000",
         },
-        // Preconnect para mejor performance
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
         {
           rel: "preconnect",
@@ -145,28 +160,18 @@ export default defineNuxtConfig({
             ],
           }),
         },
-        {
-          type: "text/javascript",
-          innerHTML: `
-            (function(c,l,a,r,i,t,y){
-              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "${process.env.NUXT_CLARITY_PROJECT_ID || ""}");
-          `,
-        },
       ],
     },
   },
 
-  // Build configuration optimizada
+  // Build configuration
   build: {
     transpile: ["gsap"],
   },
 
   // Optimizaciones de performance
   experimental: {
-    payloadExtraction: false, // Mejor para sitios estáticos
+    payloadExtraction: false,
   },
 
   // Nitro optimizations

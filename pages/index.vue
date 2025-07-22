@@ -213,7 +213,19 @@ import { useHead } from "#app";
 import { useErrorHandler } from "~/composables/useErrorHandler";
 import { usePerformance } from "~/composables/usePerformance";
 import { useGsapAnimations } from "~/composables/useGsapAnimations";
+import BaseButton from "~/components/BaseButton.vue";
+import SectionTitle from "~/components/SectionTitle.vue";
+import SkillCard from "~/components/SkillCard.vue";
+import SkeletonLoader from "~/components/SkeletonLoader.vue";
+import LazyImage from "~/components/LazyImage.vue";
+import ExperienceTimeline from "~/components/ExperienceTimeline.vue";
+import EducationCarousel from "~/components/EducationCarousel.vue";
+import ProjectCard from "~/components/ProjectCard.vue";
+import ContactInfo from "~/components/ContactInfo.vue";
+import ContactForm from "~/components/ContactForm.vue";
+import ErrorBoundary from "~/components/ErrorBoundary.vue";
 
+// Auto-imports - ya no necesitan importación explícita
 const { handleError } = useErrorHandler();
 const { trackCustomMetric } = usePerformance();
 

@@ -1,6 +1,5 @@
 <template>
   <header class="app-header" :class="{ scrolled: isScrolled }">
-    <!-- Skip link para accesibilidad -->
     <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
     <div class="container">
@@ -97,6 +96,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import { useErrorHandler } from "~/composables/useErrorHandler";
+import ThemeToggle from "~/components/ThemeToggle.vue";
 
 const { handleError } = useErrorHandler();
 
@@ -142,12 +142,11 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
   window.removeEventListener("keydown", handleKeydown);
-  document.body.style.overflow = ""; // Cleanup
+  document.body.style.overflow = "";
 });
 </script>
 
 <style lang="scss" scoped>
-// Mejoras de accesibilidad
 .skip-link {
   position: absolute;
   top: -40px;
@@ -168,13 +167,11 @@ onUnmounted(() => {
 .nav-link {
   position: relative;
 
-  // Mejorar área de click en móvil
   @media (max-width: 768px) {
     padding: 0.75rem 0;
     display: block;
   }
 
-  // Focus visible
   &:focus-visible {
     outline: 2px solid var(--accent-color);
     outline-offset: 2px;
@@ -183,7 +180,6 @@ onUnmounted(() => {
 }
 
 .mobile-menu-toggle {
-  // Mejorar área de click
   padding: 0.75rem;
 
   &:focus-visible {
