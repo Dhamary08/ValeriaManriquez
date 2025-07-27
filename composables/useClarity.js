@@ -3,10 +3,8 @@ import { useRuntimeConfig } from "#app";
 export const useClarity = () => {
   const config = useRuntimeConfig();
 
-  const isClient = typeof window !== "undefined";
-
   const initClarity = () => {
-    if (!isClient || !config.public.clarityProjectId) return;
+    if (!process.client || !config.public.clarityProjectId) return;
 
     // Verificar si Clarity ya está inicializado
     if (window.clarity) {
@@ -14,12 +12,12 @@ export const useClarity = () => {
       return;
     }
 
-    // Inicializar Clarity
-    window.clarity =
-      window.clarity ||
-      (() => {
-        (window.clarity.q = window.clarity.q || []).push(arguments);
-      });
+    // Inicializar Clarity correctamente - CORREGIDO
+    window.clarity = () => {
+      // Usar rest parameters en lugar de arguments
+      const args = Array.from(arguments);
+      (window.clarity.q = window.clarity.q || []).push(args);
+    };
 
     const script = document.createElement("script");
     script.type = "text/javascript";
@@ -31,7 +29,7 @@ export const useClarity = () => {
   };
 
   const trackEvent = (eventName, eventData = {}) => {
-    if (!isClient || !window.clarity) return;
+    if (!process.client || !window.clarity) return;
 
     try {
       window.clarity("event", eventName, eventData);
@@ -42,7 +40,7 @@ export const useClarity = () => {
   };
 
   const identifyUser = (userId, sessionData = {}) => {
-    if (!isClient || !window.clarity) return;
+    if (!process.client || !window.clarity) return;
 
     try {
       window.clarity("identify", userId, sessionData);
@@ -53,7 +51,7 @@ export const useClarity = () => {
   };
 
   const setCustomTag = (key, value) => {
-    if (!isClient || !window.clarity) return;
+    if (!process.client || !window.clarity) return;
 
     try {
       window.clarity("set", key, value);
@@ -64,7 +62,7 @@ export const useClarity = () => {
   };
 
   const upgradeSession = () => {
-    if (!isClient || !window.clarity) return;
+    if (!process.client || !window.clarity) return;
 
     try {
       window.clarity("upgrade");

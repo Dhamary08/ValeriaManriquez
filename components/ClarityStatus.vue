@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showStatus" class="clarity-status">
+  <div class="clarity-status">
     <div
       class="status-indicator"
       :class="{ active: isActive, error: hasError }"
@@ -69,17 +69,27 @@ const toggleDetails = () => {
 };
 
 const testEvent = () => {
-  trackEvent("clarity_test_event", {
-    timestamp: new Date().toISOString(),
-    test_data: "Component test",
-  });
-  eventCount.value++;
-  lastActivity.value = new Date().toLocaleTimeString();
+  try {
+    trackEvent("clarity_test_event", {
+      timestamp: new Date().toISOString(),
+      test_data: "Component test",
+    });
+    eventCount.value++;
+    lastActivity.value = new Date().toLocaleTimeString();
+  } catch (error) {
+    console.error("Error testing Clarity event:", error);
+    hasError.value = true;
+  }
 };
 
 const upgradeSession = () => {
-  clarityUpgradeSession();
-  lastActivity.value = `Session upgraded at ${new Date().toLocaleTimeString()}`;
+  try {
+    clarityUpgradeSession();
+    lastActivity.value = `Session upgraded at ${new Date().toLocaleTimeString()}`;
+  } catch (error) {
+    console.error("Error upgrading Clarity session:", error);
+    hasError.value = true;
+  }
 };
 
 onMounted(() => {
@@ -89,13 +99,18 @@ onMounted(() => {
 
   // Verificar si Clarity está activo
   const checkClarity = () => {
-    if (window.clarity) {
-      isActive.value = true;
-      hasError.value = false;
-      setCustomTag("component_status", "active");
-    } else {
-      isActive.value = false;
-      hasError.value = !clarityProjectId.value;
+    try {
+      if (window.clarity && typeof window.clarity === "function") {
+        isActive.value = true;
+        hasError.value = false;
+        setCustomTag("component_status", "active");
+      } else {
+        isActive.value = false;
+        hasError.value = !clarityProjectId.value;
+      }
+    } catch (error) {
+      console.error("Error checking Clarity status:", error);
+      hasError.value = true;
     }
   };
 

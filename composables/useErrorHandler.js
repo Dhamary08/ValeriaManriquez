@@ -50,15 +50,22 @@ export const useErrorHandler = () => {
       globalError.value = errorInfo;
     }
 
-    // Track error for analytics
-    if (typeof window !== "undefined" && window.clarity) {
-      window.clarity("event", "error_handled", {
-        error_message: errorInfo.message,
-        error_context: context,
-        error_type: type,
-        error_severity: severity,
-        error_id: errorInfo.id,
-      });
+    // Track error for analytics - MEJORADO CON VERIFICACIONES
+    if (process.client && typeof window !== "undefined") {
+      try {
+        // Verificar que Clarity esté disponible y sea una función
+        if (window.clarity && typeof window.clarity === "function") {
+          window.clarity("event", "error_handled", {
+            error_message: errorInfo.message,
+            error_context: context,
+            error_type: type,
+            error_severity: severity,
+            error_id: errorInfo.id,
+          });
+        }
+      } catch (clarityError) {
+        console.warn("Error tracking to Clarity:", clarityError);
+      }
     }
 
     // Log to external service in production
