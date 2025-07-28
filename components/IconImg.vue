@@ -26,6 +26,7 @@ import {
   Star,
   ChevronLeft,
   ChevronRight,
+  Globe,
 } from "lucide-vue-next";
 
 const props = defineProps({
@@ -45,6 +46,7 @@ const iconMap = {
   linkedin: Linkedin,
   twitter: Twitter,
   mail: Mail,
+  globe: Globe,
   phone: Phone,
   "map-pin": MapPin,
   vue: Code,

@@ -19,7 +19,7 @@
 
       <div class="contact-item">
         <div class="contact-icon">
-          <IconImg name="www" />
+          <IconImg name="globe" />
         </div>
         <div class="contact-details">
           <h4>Sitio</h4>
@@ -52,7 +52,7 @@
         <IconImg name="mail" />
       </a>
       <a href="https://dhamy.cl" target="_blank" class="social-link">
-        <IconImg name="web" />
+        <IconImg name="globe" />
       </a>
     </div>
   </div>

@@ -10,7 +10,7 @@
             target="_blank"
             @click="trackProjectDemo(project)"
           >
-            <Icon name="external-link" />
+            <IconImg name="external-link" />
             <span>Demo</span>
           </a>
           <a
@@ -19,7 +19,7 @@
             target="_blank"
             @click="trackProjectCode(project)"
           >
-            <Icon name="github" />
+            <IconImg name="github" />
             <span>Código</span>
           </a>
         </div>

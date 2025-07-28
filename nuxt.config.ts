@@ -119,7 +119,7 @@ export default defineNuxtConfig({
 
         // PWA
         { name: "theme-color", content: "#3b82f6" },
-        { name: "apple-mobile-web-app-capable", content: "yes" },
+        { name: "mobile-web-app-capable", content: "yes" },
         { name: "apple-mobile-web-app-status-bar-style", content: "default" },
       ],
       link: [
@@ -176,7 +176,7 @@ export default defineNuxtConfig({
 
   // Build configuration
   build: {
-    transpile: ["gsap"],
+    transpile: ["gsap", "lucide-vue-next"],
   },
 
   // Optimizaciones de performance

@@ -7,7 +7,7 @@
     <div class="error-content">
       <div class="error-header">
         <div class="error-icon">
-          <Icon :name="getErrorIcon()" />
+          <IconImg :name="getErrorIcon()" />
         </div>
         <div class="error-info">
           <h3 class="error-title">{{ getErrorTitle() }}</h3>
@@ -29,7 +29,7 @@
 
       <div class="error-actions">
         <BaseButton @click="retry" variant="primary" size="small">
-          <Icon name="refresh-cw" />
+          <IconImg name="refresh-cw" />
           Reintentar
         </BaseButton>
         <BaseButton
@@ -38,7 +38,7 @@
           size="small"
           v-if="canReport"
         >
-          <Icon name="flag" />
+          <IconImg name="flag" />
           Reportar
         </BaseButton>
         <BaseButton
@@ -47,7 +47,7 @@
           size="small"
           v-if="canDismiss"
         >
-          <Icon name="x" />
+          <IconImg name="x" />
           Descartar
         </BaseButton>
       </div>
@@ -59,6 +59,7 @@
 <script setup>
 import { ref, onErrorCaptured, computed } from "vue";
 import { useErrorHandler } from "~/composables/useErrorHandler";
+import IconImg from "./IconImg.vue";
 
 const props = defineProps({
   fallback: {

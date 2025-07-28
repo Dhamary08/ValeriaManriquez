@@ -6,7 +6,7 @@
   >
     <div class="toggle-track">
       <div class="toggle-thumb" :class="{ dark: isDarkMode }">
-        <Icon :name="isDarkMode ? 'moon' : 'sun'" />
+        <IconImg :name="isDarkMode ? 'moon' : 'sun'" />
       </div>
     </div>
   </button>
@@ -15,6 +15,7 @@
 <script setup>
 import { useTheme } from "@/composables/useTheme";
 import { useClarity } from "@/composables/useClarity";
+import IconImg from "./IconImg.vue";
 
 const { isDarkMode, toggleTheme } = useTheme();
 const { trackEvent, setCustomTag } = useClarity();

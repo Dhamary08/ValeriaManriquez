@@ -1,7 +1,14 @@
 <template>
   <div id="app">
+    <!-- Skip link para accesibilidad -->
+    <a href="#main-content" class="skip-link"> Skip to main content </a>
+
     <ErrorBoundary>
-      <ClarityStatus v-if="showClarityStatus" />
+      <!-- Solo mostrar después de la hidratación -->
+      <ClientOnly>
+        <ClarityStatus />
+      </ClientOnly>
+
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
@@ -13,41 +20,19 @@
 </template>
 
 <script setup>
-import {
-  useTheme,
-  useRuntimeConfig,
-  useHead,
-  computed,
-  onMounted,
-  onErrorCaptured,
-} from "#imports";
+import { computed, onMounted, onErrorCaptured, onUnmounted } from "vue";
+import { useTheme } from "~/composables/useTheme";
+import { useRuntimeConfig } from "#app";
+import { useHead } from "#app";
 import { useErrorHandler } from "~/composables/useErrorHandler";
 
-// Auto-imports ya no necesitan importación explícita
-const nuxtApp = useNuxtApp();
 const { isDarkMode, initTheme } = useTheme();
 const config = useRuntimeConfig();
 const { handleCriticalError } = useErrorHandler();
 
-// Global error handler
-onErrorCaptured((error, instance, info) => {
-  handleCriticalError(error, `Global: ${info}`);
-  return false;
+const showClarityStatus = computed(() => {
+  return process.dev && config.public.clarityProjectId;
 });
-
-// Unhandled promise rejections
-const handleUnhandledRejection = (event) => {
-  handleCriticalError(new Error(event.reason), "Unhandled Promise Rejection");
-};
-
-const handleGlobalJavaScriptError = (event) => {
-  handleCriticalError(event.error, "Global JavaScript Error");
-};
-
-if (process.client) {
-  window.addEventListener("unhandledrejection", handleUnhandledRejection);
-  window.addEventListener("error", handleGlobalJavaScriptError);
-}
 
 // SEO mejorado
 useHead({
@@ -60,26 +45,73 @@ useHead({
   ],
 });
 
-// Solo mostrar Clarity status en desarrollo
-const showClarityStatus = computed(() => {
-  return nuxtApp.isDev && config.public.clarityProjectId;
+// Global error handler - MEJORADO
+onErrorCaptured((error, instance, info) => {
+  try {
+    handleCriticalError(error, `Global: ${info}`);
+  } catch (handlerError) {
+    console.error("Error in error handler:", handlerError);
+  }
+  return false;
 });
 
-// Inicializar tema en el cliente
-onMounted(() => {
-  initTheme();
-
-  // Soporte para prefers-reduced-motion
-  if (typeof window !== "undefined") {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    );
-    if (prefersReducedMotion.matches) {
-      document.documentElement.style.setProperty("--transition-fast", "0s");
-      document.documentElement.style.setProperty("--transition-normal", "0s");
-      document.documentElement.style.setProperty("--transition-slow", "0s");
-    }
+// Unhandled promise rejections - MEJORADO
+const handleUnhandledRejection = (event) => {
+  try {
+    const error =
+      event.reason instanceof Error ? event.reason : new Error(event.reason);
+    handleCriticalError(error, "Unhandled Promise Rejection");
+  } catch (handlerError) {
+    console.error("Error handling unhandled rejection:", handlerError);
   }
+};
+
+// Global JavaScript errors - MEJORADO
+const handleGlobalJavaScriptError = (event) => {
+  try {
+    const error = event.error || new Error(event.message);
+    handleCriticalError(error, "Global JavaScript Error");
+  } catch (handlerError) {
+    console.error("Error handling global JS error:", handlerError);
+  }
+};
+
+const initListeners = () => {
+  if (process.client) {
+    window.addEventListener("unhandledrejection", handleUnhandledRejection);
+    window.addEventListener("error", handleGlobalJavaScriptError);
+  }
+};
+
+const removeListeners = () => {
+  if (process.client) {
+    window.removeEventListener("unhandledrejection", handleUnhandledRejection);
+    window.removeEventListener("error", handleGlobalJavaScriptError);
+  }
+};
+
+onMounted(() => {
+  try {
+    initTheme();
+    initListeners();
+
+    if (process.client) {
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      );
+      if (prefersReducedMotion.matches) {
+        document.documentElement.style.setProperty("--transition-fast", "0s");
+        document.documentElement.style.setProperty("--transition-normal", "0s");
+        document.documentElement.style.setProperty("--transition-slow", "0s");
+      }
+    }
+  } catch (error) {
+    console.error("Error in app initialization:", error);
+  }
+});
+
+onUnmounted(() => {
+  removeListeners();
 });
 </script>
 

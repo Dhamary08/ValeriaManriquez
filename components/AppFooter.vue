@@ -59,7 +59,7 @@
               <IconImg name="mail" />
             </a>
             <a href="https://dhamy.cl" target="_blank" class="social-link">
-              <IconImg name="web" />
+              <IconImg name="globe" />
             </a>
           </div>
         </div>

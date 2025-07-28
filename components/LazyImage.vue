@@ -20,7 +20,7 @@
     />
 
     <div v-if="hasError" class="image-error">
-      <Icon name="image-off" />
+      <IconImg name="image-off" />
       <span>Error al cargar imagen</span>
     </div>
   </div>

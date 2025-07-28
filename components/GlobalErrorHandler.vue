@@ -13,13 +13,13 @@
             class="close-btn"
             aria-label="Cerrar"
           >
-            <Icon name="x" />
+            <IconImg name="x" />
           </button>
         </div>
 
         <div class="error-body">
           <div class="error-icon">
-            <Icon name="alert-circle" />
+            <IconImg name="alert-circle" />
           </div>
           <div class="error-content">
             <p class="error-message">{{ globalError.message }}</p>
@@ -29,11 +29,11 @@
 
         <div class="error-actions">
           <BaseButton @click="reloadPage" variant="primary">
-            <Icon name="refresh-cw" />
+            <IconImg name="refresh-cw" />
             Recargar Página
           </BaseButton>
           <BaseButton @click="reportAndDismiss" variant="outline">
-            <Icon name="flag" />
+            <IconImg name="flag" />
             Reportar y Continuar
           </BaseButton>
         </div>
@@ -57,7 +57,7 @@
             </div>
           </div>
           <button @click="removeError(error.id)" class="toast-close">
-            <Icon name="x" />
+            <IconImg name="x" />
           </button>
         </div>
       </TransitionGroup>
